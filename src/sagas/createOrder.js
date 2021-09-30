@@ -25,7 +25,7 @@ const createOrderFetch = async (data) => {
             comment: data.comment,
             payment_type: data.paymentType,
             delivery_type: data.deliveryType,
-            delivery_price: data.deliveryPrice
+            delivery_price: +data.deliveryPrice
         })
     }).then(response => response.json());
 }

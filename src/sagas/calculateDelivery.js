@@ -3,7 +3,7 @@ import { API_URL, CALCULATE_DELIVERY_REQUEST } from "../constants";
 import { calculateDeliverySuccess } from "../redux/actions";
 
 
-const calculateDeliveryFetch = async ({cityCode, deliveryType}) => {
+const calculateDeliveryFetch = async ({cityCode, deliveryType, weight, ...data}) => {
 
     return await fetch(`${API_URL}/cdek/calc`, {
         method: 'POST',
@@ -12,7 +12,9 @@ const calculateDeliveryFetch = async ({cityCode, deliveryType}) => {
         },
         body: JSON.stringify({
             city_id: cityCode,
-            delivery_type: deliveryType === 'pickup' ? 'pickpoint' : deliveryType
+            delivery_type: deliveryType === 'pickup' ? 'pickpoint' : deliveryType,
+            weight: weight.toString(),
+            ...data
         })
     }).then(response => response.json());
 }

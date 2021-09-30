@@ -72,7 +72,12 @@ export const Delivery = ({
         const cityCode = city.code;
 
         handleGetPickpoints(cityCode);
-        handleCalculateDelivery({cityCode, deliveryType});
+        handleCalculateDelivery({
+            cityCode,
+            deliveryType,
+            insurance: cart.items_cost,
+            ...cart.package
+        });
 
         handleChange('city', city);
 
@@ -95,7 +100,21 @@ export const Delivery = ({
 
     const onSubmit = (e) => {
         e.preventDefault();
-        handleCreateOrder({...data, cartId});
+        handleCreateOrder({...data, cartId, deliveryPrice});
+    }
+
+    const getCityPublicName = (city) => {
+        let result = `${city.name}, ${city.sub_region}, ${city.region}`;
+
+        if (city.name === city.sub_region || !city.sub_region) {
+            result = `${city.name}, ${city.region}`;
+        }
+
+        if (city.name === city.region) {
+            result = city.name;
+        }
+
+        return result;
     }
 
     return (
@@ -134,13 +153,12 @@ export const Delivery = ({
                             />
                         </label>
                         <label className="delivery__label">
-                            <div className="delivery__name">Компания *</div>
+                            <div className="delivery__name">Компания</div>
                             <input
                                 type="text"
                                 className="form-field delivery__field"
                                 value={data.company}
                                 onChange={(e) => handleChange('company', e.target.value)}
-                                required
                             />
                         </label>
                     </div>
@@ -158,7 +176,7 @@ export const Delivery = ({
                         <label className="delivery__label">
                             <div className="delivery__name">E-mail *</div>
                             <input
-                                type="text"
+                                type="email"
                                 className="form-field delivery__field"
                                 value={data.email}
                                 onChange={(e) => handleChange('email', e.target.value)}
@@ -168,7 +186,7 @@ export const Delivery = ({
                     </div>
                     <div className="delivery__group delivery__group_mobile_full">
                         <label className="delivery__label">
-                            <div className="delivery__name">Город *</div>
+                            <div className="delivery__name">Город</div>
                             <input
                                 type="text"
                                 className="form-field delivery__field"
@@ -181,7 +199,7 @@ export const Delivery = ({
                                         <BeatLoader loading={true} css={override} size={10} margin={2}/>
                                     ) : citiesSuggestions.suggestions.length !== 0 ? citiesSuggestions.suggestions.map(city => (
                                         <p key={city.id} onClick={() => handleChooseCity(city.id)}>
-                                            {city.name}
+                                            {getCityPublicName(city)}
                                         </p>
                                     )) : (
                                         <p>Совпадения не найдены</p>
@@ -191,23 +209,24 @@ export const Delivery = ({
                         </label>
                         {data.deliveryType === 'pickup' ? pickpoints && (
                             <label className="delivery__label">
-                                <div className="delivery__name">Пункт выдачи *</div>
+                                <div className="delivery__name">Пункт выдачи</div>
                                 <select
                                     className="form-field delivery__field"
                                     defaultValue=""
                                     value={data.pickpoint.id}
                                     onChange={handleChangePickpoint}
-                                    required
                                 >
                                     <option value="" disabled>Выберите пункт выдачи</option>
                                     {pickpoints.map(pickpoint => (
-                                        <option value={pickpoint.id} key={pickpoint.id}>{pickpoint.name}</option>
+                                        <option value={pickpoint.id} key={pickpoint.id}>
+                                            {pickpoint.name}, {pickpoint.address}
+                                        </option>
                                     ))}
                                 </select>
                             </label>
                         ) : (
                             <label className="delivery__label">
-                                <div className="delivery__name">Адрес *</div>
+                                <div className="delivery__name">Адрес</div>
                                 <input
                                     type="text"
                                     className="form-field delivery__field"

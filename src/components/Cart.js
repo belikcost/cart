@@ -1,5 +1,12 @@
 import { withMargins } from "../utils";
 
+import cartWhite from '../img/card-1-white.png';
+import cartBlack from '../img/card-1-black.png';
+import cartCustom from '../img/card-1-custom-white.png';
+import sticker from '../img/sticker-1.png';
+import stickerCustom from '../img/sticker-1-custom.png';
+import logo from '../img/taglme_icon.png';
+
 
 export const Cart = ({cart}) => {
 
@@ -16,7 +23,24 @@ export const Cart = ({cart}) => {
                 <div className="cart__list">
                     {cart.items.map(item => (
                         <div className="cart__item" key={item.id}>
-                            <img src="images/product.png" alt="" className="cart__img"/>
+                            {item.code === 'CARD-TAGLME-NTAG213-WHITE' && (
+                                <img src={cartWhite} alt="" className="cart__img"/>
+                            )}
+                            {item.code === 'CARD-TAGLME-NTAG213-BLACK' && (
+                                <img src={cartBlack} alt="" className="cart__img"/>
+                            )}
+                            {item.code === 'CARD-NTAG213-CUSTOM' && (
+                                <img src={cartCustom} alt="" className="cart__img"/>
+                            )}
+                            {item.code.includes('STICKER-TAGLME') && (
+                                <img src={sticker} alt="" className="cart__img"/>
+                            )}
+                            {item.code.includes('STICKER-CUSTOM') && (
+                                <img src={stickerCustom} alt="" className="cart__img"/>
+                            )}
+                            {item.code.includes('SUBSCRIPTION') && (
+                                <img src={logo} alt="" className="cart__img"/>
+                            )}
                             <div className="text cart__name">{item.name}</div>
                             <div className="text cart__value cart__value_count">
                                 <span className="cart__mobile-text">Количество: </span>{item.amount}
