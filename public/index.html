@@ -2,42 +2,123 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <title>Taglme</title>
   </head>
   <body>
+  <header class="header">
+    <div class="wrapper">
+      <div class="header__content">
+        <a href="/" class="logo header__logo">
+          <img src="images/logo.svg" alt="Taglme" class="logo__img">
+        </a>
+        <nav class="menu header__menu">
+          <ul class="menu__list">
+            <li class="menu__item"><a class="link menu__link" href="index.html#features">Преимущества</a></li>
+            <li class="menu__item"><a class="link menu__link" href="index.html#how-work">Как работает?</a></li>
+            <li class="menu__item"><a class="link menu__link" href="index.html#stages">Как заказать?</a></li>
+            <li class="menu__item"><a class="link menu__link" href="index.html#calc">Калькулятор</a></li>
+            <li class="menu__item"><a class="link menu__link" href="index.html#about">О нас</a></li>
+            <li class="menu__item"><a class="link menu__link" href="index.html#faq">FAQ</a></li>
+          </ul>
+          <button class="menu__toggle">
+            <span class="menu__lines"></span>
+          </button>
+        </nav>
+        <a href="tel:+74993915405" class="link phone-link header__phone">+7 (499) 391 54 05</a>
+        <a href="order.html" class="link cart-link header__cart"></a>
+      </div>
+    </div>
+  </header>
+  <main class="main">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  </main>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer__content">
+        <div class="footer__column footer__column_first">
+          <a href="/" class="logo">
+            <img src="images/logo-white.svg" alt="Taglme" class="logo__img">
+          </a>
+          <div class="footer__copyright">© 2021 taglme</div>
+          <div class="footer__item">
+            <a href="#" class="link footer__link footer__privacy-policy">Политика конфиденциальности</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <div class="footer__item">
+            <a href="index.html#features" class="link footer__link">Преимущества</a>
+          </div>
+          <div class="footer__item">
+            <a href="index.html#how-work" class="link footer__link">Как работает?</a>
+          </div>
+          <div class="footer__item">
+            <a href="index.html#stages" class="link footer__link">Как заказать?</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <div class="footer__item">
+            <a href="index.html#calc" class="link footer__link">Онлайн-калькулятор</a>
+          </div>
+          <div class="footer__item">
+            <a href="index.html#clients" class="link footer__link">Нам доверяют</a>
+          </div>
+          <div class="footer__item">
+            <a href="index.html#about" class="link footer__link">О нас</a>
+          </div>
+          <div class="footer__item">
+            <a href="index.html#faq" class="link footer__link">FAQ</a>
+          </div>
+        </div>
+        <div class="footer__column footer__column_last">
+          <div class="footer__item">
+            <a href="mailto:info@nfcpoint.ru" class="link email-link footer__link">info@nfcpoint.ru</a>
+          </div>
+          <div class="footer__item">
+            <a href="tel:+74993915405" class="link phone-link footer__link footer__phone">8 (499) 391 54 05</a>
+          </div>
+          <div class="footer__item">
+            <a href="#" class="link address footer__link footer__address">г. Москва, ул. <br> Промышленная, д. 11, стр. 3</a>
+          </div>
+          <div class="social-links footer__social-links">
+            <a href="#" class="social-links__item">
+              <img src="images/icons/vk.svg" alt="" class="social-links__img">
+            </a>
+            <a href="#" class="social-links__item">
+              <img src="images/icons/youtube.svg" alt="" class="social-links__img">
+            </a>
+            <a href="#" class="social-links__item">
+              <img src="images/icons/twitter.svg" alt="" class="social-links__img">
+            </a>
+            <a href="#" class="social-links__item">
+              <img src="images/icons/facebook.svg" alt="" class="social-links__img">
+            </a>
+            <a href="#" class="social-links__item">
+              <img src="images/icons/instagram.svg" alt="" class="social-links__img">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+  <script src="js/main.js"></script>
   </body>
 </html>

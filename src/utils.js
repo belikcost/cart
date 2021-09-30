@@ -1,0 +1,1 @@
+export const withMargins = (price) => price.toLocaleString('ru-RU').replace(',', '.');
