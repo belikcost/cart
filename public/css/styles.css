@@ -1148,6 +1148,8 @@ input[type='number'] {
     background: #fff;
     z-index: 2;
     width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
 }
 
 .delivery__suggestions p {
