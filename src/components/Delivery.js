@@ -236,14 +236,12 @@ export const Delivery = ({
                             </label>
                         )}
                     </div>
-                    {data.deliveryType === 'pickup' && pickpoints && (
-                        <Map
-                            cityLat={data.city.latitude}
-                            cityLng={data.city.longitude}
-                            pickpoints={pickpoints}
-                            handleChange={handleChange}
-                        />
-                    )}
+                    <Map
+                        cityLat={data.city.latitude}
+                        cityLng={data.city.longitude}
+                        pickpoints={pickpoints}
+                        handleChange={handleChange}
+                    />
                     <div className="delivery__name">Оплата</div>
                     <div className="delivery__group delivery__group_mobile_full">
                         <input

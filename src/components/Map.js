@@ -7,16 +7,17 @@ import point from '../img/point.svg';
 
 
 const Map = ({google, cityLat, cityLng, pickpoints, handleChange}) => {
-    console.log(cityLng);
+
     return (
         <div className="delivery__map">
             <GoogleMap
                 google={google}
                 zoom={10}
                 styles={MapStyle}
+                initialCenter={{lat: 55.753764, lng: 37.622312}}
                 center={{lat: cityLat || 55.753764, lng: cityLng || 37.622312}}
             >
-                {pickpoints.map(pickpoint => (
+                {pickpoints && pickpoints.map(pickpoint => (
                     <Marker
                         position={{lat: pickpoint.coord_y, lng: pickpoint.coord_x}}
                         icon={{url: point}}
