@@ -41,6 +41,9 @@ export const Cart = ({cart}) => {
                             {item.code.includes('SUBSCRIPTION') && (
                                 <img src={logo} alt="" className="cart__img"/>
                             )}
+                            {item.code.includes('SERVICE') && (
+                                <img src={logo} alt="" className="cart__img"/>
+                            )}
                             <div className="text cart__name">{item.name}</div>
                             <div className="text cart__value cart__value_count">
                                 <span className="cart__mobile-text">Количество: </span>{item.amount}

@@ -48,6 +48,25 @@ export const Delivery = ({
     const [searchString, setSearchString] = useState('');
 
     const handleChange = (name, value) => {
+
+        if (name === 'city' || name === 'deliveryType') {
+            let deliveryType = data.deliveryType;
+            let cityCode = data.city.code;
+
+            if (name === 'city') {
+                cityCode = value.code;
+            } else if (name === 'deliveryType') {
+                deliveryType = value;
+            }
+
+            handleCalculateDelivery({
+                cityCode,
+                deliveryType,
+                insurance: cart.items_cost,
+                ...cart.package
+            });
+        }
+
         setData({...data, [name]: value});
     }
 
@@ -67,17 +86,11 @@ export const Delivery = ({
 
     const handleChooseCity = (cityId) => {
         const city = citiesSuggestions.suggestions.find(city => city.id === cityId);
-
-        const deliveryType = data.deliveryType;
         const cityCode = city.code;
 
-        handleGetPickpoints(cityCode);
-        handleCalculateDelivery({
-            cityCode,
-            deliveryType,
-            insurance: cart.items_cost,
-            ...cart.package
-        });
+        if (data.deliveryType === 'pickup') {
+            handleGetPickpoints(cityCode);
+        }
 
         handleChange('city', city);
 
@@ -190,7 +203,7 @@ export const Delivery = ({
                             <input
                                 type="text"
                                 className="form-field delivery__field"
-                                value={data.city.name || searchString}
+                                value={data.city.id ? getCityPublicName(data.city) : searchString}
                                 onChange={onChangeCityField}
                             />
                             {citiesSuggestions && searchString.length !== 0 && (
