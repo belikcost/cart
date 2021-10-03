@@ -4,7 +4,7 @@ import { getCitiesSuggestionsSuccess } from "../redux/actions";
 
 
 const getCitiesSuggestionsFetch = async (searchString) => {
-    return await fetch(`${API_URL}/cdek/cities?limit=20&keyword=${searchString}`).then(response => response.json());
+    return await fetch(`${API_URL}/cdek/cities?limit=10&keyword=${searchString}`).then(response => response.json());
 }
 
 function* getCitiesSuggestions(action) {
