@@ -1,35 +1,35 @@
-import { Map as GoogleMap, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { GOOGLE_API_KEY } from "../constants";
-
-import MapStyle from "./MapStyle";
+import { YMaps, Map as YandexMap, Placemark, Clusterer } from 'react-yandex-maps';
 
 import point from '../img/point.svg';
 
 
-const Map = ({google, cityLat, cityLng, pickpoints, handleChange}) => {
+export const Map = ({ google, cityLat, cityLng, pickpoints, handleChange }) => {
 
     return (
-        <div className="delivery__map">
-            <GoogleMap
-                google={google}
-                zoom={10}
-                styles={MapStyle}
-                initialCenter={{lat: 55.753764, lng: 37.622312}}
-                center={{lat: cityLat || 55.753764, lng: cityLng || 37.622312}}
-            >
-                {pickpoints && pickpoints.map(pickpoint => (
-                    <Marker
-                        position={{lat: pickpoint.coord_y, lng: pickpoint.coord_x}}
-                        icon={{url: point}}
-                        onClick={() => handleChange('pickpoint', pickpoint)}
-                        key={pickpoint.id}
-                    />
-                ))}
-            </GoogleMap>
-        </div>
+        <YMaps>
+            <div className="delivery__map">
+                <YandexMap
+                    width={'100%'}
+                    height={'100%'}
+                    state={{ center: [cityLat || 55.753764, cityLng || 37.622312], zoom: 10 }}
+                >
+                    <Clusterer
+                        options={{
+                            preset: 'islands#invertedOrangeClusterIcons',
+                            groupByCoordinates: false,
+                        }}
+                    >
+                        {pickpoints.map(pickpoint => (
+                            <Placemark
+                                geometry={[pickpoint.coord_y, pickpoint.coord_x]}
+                                options={{iconLayout: 'default#image', iconImageHref: point}}
+                                onClick={() => handleChange('pickpoint', pickpoint)}
+                                key={pickpoint.id}
+                            />
+                        ))}
+                    </Clusterer>
+                </YandexMap>
+            </div>
+        </YMaps>
     );
 }
-
-export default GoogleApiWrapper({
-    apiKey: GOOGLE_API_KEY,
-})(Map);

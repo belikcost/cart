@@ -9,7 +9,9 @@ import {
 } from "../constants";
 
 
-const initialState = {};
+const initialState = {
+    pickpoints: []
+};
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {

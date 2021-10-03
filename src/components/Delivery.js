@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 
-import Map from "./Map";
+import { Map } from "./Map";
 
 import { withMargins } from "../utils";
 
@@ -59,12 +59,15 @@ export const Delivery = ({
                 deliveryType = value;
             }
 
-            handleCalculateDelivery({
-                cityCode,
-                deliveryType,
-                insurance: cart.items_cost,
-                ...cart.package
-            });
+            if (cityCode) {
+                handleCalculateDelivery({
+                    cityCode,
+                    deliveryType,
+                    insurance: cart.items_cost,
+                    ...cart.package
+                });
+                handleGetPickpoints(cityCode);
+            }
         }
 
         setData({...data, [name]: value});
@@ -220,7 +223,7 @@ export const Delivery = ({
                                 </div>
                             )}
                         </label>
-                        {data.deliveryType === 'pickup' ? pickpoints && (
+                        {data.deliveryType === 'pickup' ? pickpoints.length !== 0 && (
                             <label className="delivery__label">
                                 <div className="delivery__name">Пункт выдачи</div>
                                 <select
@@ -249,12 +252,14 @@ export const Delivery = ({
                             </label>
                         )}
                     </div>
-                    <Map
-                        cityLat={data.city.latitude}
-                        cityLng={data.city.longitude}
-                        pickpoints={pickpoints}
-                        handleChange={handleChange}
-                    />
+                    {data.deliveryType === 'pickup' && pickpoints && (
+                        <Map
+                            cityLat={data.city.latitude}
+                            cityLng={data.city.longitude}
+                            pickpoints={pickpoints}
+                            handleChange={handleChange}
+                        />
+                    )}
                     <div className="delivery__name">Оплата</div>
                     <div className="delivery__group delivery__group_mobile_full">
                         <input
