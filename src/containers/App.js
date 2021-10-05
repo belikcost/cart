@@ -53,6 +53,8 @@ const App = ({
     useLayoutEffect(() => {
         gtag('js', new Date());
         gtag('config', 'G-Q589DMNJSM');
+
+        window.ym(85747113, 'hit', window.location.href);
     }, []);
 
     useEffect(() => {
