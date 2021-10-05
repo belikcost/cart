@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { connect } from "react-redux";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -23,6 +23,12 @@ const override = `
 
 const cartId = localStorage.getItem('cartId');
 
+function gtag() {
+    const dataLayer = window.dataLayer || [];
+    dataLayer.push(arguments);
+}
+
+
 const App = ({
                  cart,
                  handleGetCart,
@@ -37,11 +43,24 @@ const App = ({
                  handleCreateOrder,
                  orderWasCreated
              }) => {
+
     useEffect(() => {
         if (!cart && cartId) {
             handleGetCart(cartId);
         }
     }, [cart])
+
+    useLayoutEffect(() => {
+        gtag('js', new Date());
+        gtag('config', 'G-Q589DMNJSM');
+    }, []);
+
+    useEffect(() => {
+        if (orderWasCreated) {
+            gtag('send', 'pageview');
+        }
+    }, [orderWasCreated])
+
 
     if (cart) {
 
